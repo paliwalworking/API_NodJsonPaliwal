@@ -1,0 +1,445 @@
+=============================
+api server.js
+Let's implement our first RESTful API listUsers using the following code in a server.js file −
+server.js
+
+var express = require('express');
+var app = express();
+var fs = require("fs");
+
+app.get('/IceCreamFlavour', function (req, res) {
+   fs.readFile( __dirname + "/" + "sample.json", 'utf8', function (err, data) {
+      console.log( data );
+      res.end( data );	
+   });
+})
+ 
+var server = app.listen(8081, function () {
+   var host = server.address().address
+   var port = server.address().port
+   console.log("Example app listening at http://%s:%s", host, port)
+})
+
+=============================
+Index.html file
+======================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSON Test</title>
+</head>
+<body>
+    <div id="myData"></div>
+    <script>
+        fetch('Sample.json')//
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+        function appendData(data) {
+            var mainContainer = document.getElementById("myData");
+            for (var i = 0; i < data.length; i++) {
+
+                var div = document.createElement("div");
+div.innerHTML = 'Id: ' 
++ data[i].type + ' ' 
++ data[i].Name + ' '
++ data[i].Batter + ' '
++ data[i].Topping;
+                mainContainer.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html>
+========================
+Api for HTML form file
+
+server2.js file
+
+var express = require('express');
+var app = express();
+
+app.use(express.static('public'));
+app.get('/index.htm', function (req, res) {
+   res.sendFile( __dirname + "/" + "index.htm" );
+})
+
+app.get('/process_get', function (req, res) {
+   // Prepare output in JSON format
+   response = {
+		id:req.query.id,
+		type:req.query.type,
+		Name:req.query.type,
+		Batter:req.query.Batter,
+		Topping:req.query.topping
+};
+   console.log(response);
+   res.end(JSON.stringify(response));
+})
+
+var server = app.listen(8081, function () {
+   var host = server.address().address
+   var port = server.address().port
+   
+   console.log("Example app listening at http://%s:%s", host, port)
+})
+===========================
+sample.json
+
+[
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Regular",
+    "Topping": "None"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Regular",
+    "Topping": "Glazed"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Regular",
+    "Topping": "Sugar"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Regular",
+    "Topping": "Powdered Sugar"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Regular",
+    "Topping": "Chocolate with sprinkles"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Regular",
+    "Topping": "Chocolate"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Regular",
+    "Topping": "Maple"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Chocolate",
+    "Topping": "None"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Chocolate",
+    "Topping": "Glazed"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Chocolate",
+    "Topping": "Sugar"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Chocolate",
+    "Topping": "Powdered Sugar"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Chocolate",
+    "Topping": "Chocolate with sprinkles"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Chocolate",
+    "Topping": "Chocolate"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Chocolate",
+    "Topping": "Maple"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Blueberry",
+    "Topping": "None"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Blueberry",
+    "Topping": "Glazed"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Blueberry",
+    "Topping": "Sugar"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Blueberry",
+    "Topping": "Powdered"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Blueberry",
+    "Topping": "Chocolate with sprinkles"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Blueberry",
+    "Topping": "Chocolate"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Blueberry",
+    "Topping": "Maple"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Devil's",
+    "Topping": "Food None"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Devil's",
+    "Topping": "Food Glazed"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Devil's",
+    "Topping": "Food Sugar"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Devil's",
+    "Topping": "Food Powdered"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Devil's",
+    "Topping": "Food Choclate with"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Devil's",
+    "Topping": "Food Choclate"
+  },
+  {
+    "Id": "0001",
+    "Type": "donut",
+    "Name": "Cake",
+    "Batter": "Devil's",
+    "Topping": "Food Maple"
+  },
+  {
+    "Id": "0002",
+    "Type": "donut",
+    "Name": "Raised",
+    "Batter": "Regular",
+    "Topping": "None"
+  },
+  {
+    "Id": "0002",
+    "Type": "donut",
+    "Name": "Raised",
+    "Batter": "Regular",
+    "Topping": "Glazed"
+  },
+  {
+    "Id": "0002",
+    "Type": "donut",
+    "Name": "Raised",
+    "Batter": "Regular",
+    "Topping": "Sugar"
+  },
+  {
+    "Id": "0002",
+    "Type": "donut",
+    "Name": "Raised",
+    "Batter": "Regular",
+    "Topping": "Chocolate"
+  },
+  {
+    "Id": "0002",
+    "Type": "donut",
+    "Name": "Raised",
+    "Batter": "Regular",
+    "Topping": "Maple"
+  },
+  {
+    "Id": "0003",
+    "Type": "donut",
+    "Name": "Old",
+    "Batter": "Fashioned",
+    "Topping": "Regular None"
+  },
+  {
+    "Id": "0003",
+    "Type": "donut",
+    "Name": "Old",
+    "Batter": "Fashioned",
+    "Topping": "Regular Glazed"
+  },
+  {
+    "Id": "0003",
+    "Type": "donut",
+    "Name": "Old",
+    "Batter": "Fashioned",
+    "Topping": "Regular Choclare"
+  },
+  {
+    "Id": "0003",
+    "Type": "donut",
+    "Name": "Old",
+    "Batter": "Fashioned",
+    "Topping": "Regular Maple"
+  },
+  {
+    "Id": "0003",
+    "Type": "donut",
+    "Name": "Old",
+    "Batter": "Fashioned",
+    "Topping": "Chocolate None"
+  },
+  {
+    "Id": "0003",
+    "Type": "donut",
+    "Name": "Old",
+    "Batter": "Fashioned",
+    "Topping": "Chocolate Glazed"
+  },
+  {
+    "Id": "0003",
+    "Type": "donut",
+    "Name": "Old",
+    "Batter": "Fashioned",
+    "Topping": "Chocolate Choclate"
+  },
+  {
+    "Id": "0003",
+    "Type": "donut",
+    "Name": "Old",
+    "Batter": "Fashioned",
+    "Topping": "Chocolate Maple"
+  },
+  {
+    "Id": "0004",
+    "Type": "bar",
+    "Name": "Bar",
+    "Batter": "Regular",
+    "Topping": "Chocolate"
+  },
+  {
+    "Id": "0004",
+    "Type": "bar",
+    "Name": "Bar",
+    "Batter": "Regular",
+    "Topping": "Maple"
+  },
+  {
+    "Id": "0005",
+    "Type": "twist",
+    "Name": "Twist",
+    "Batter": "Regular",
+    "Topping": "Glazed"
+  },
+  {
+    "Id": "0005",
+    "Type": "twist",
+    "Name": "Twist",
+    "Batter": "Regular",
+    "Topping": "Sugar"
+  },
+  {
+    "Id": "0006",
+    "Type": "filled",
+    "Name": "Filled",
+    "Batter": "Regular",
+    "Topping": "Glazed"
+  },
+  {
+    "Id": "0006",
+    "Type": "filled",
+    "Name": "Filled",
+    "Batter": "Regular",
+    "Topping": "Powdered Sugar"
+  },
+  {
+    "Id": "0006",
+    "Type": "filled",
+    "Name": "Filled",
+    "Batter": "Regular",
+    "Topping": "Chocolate"
+  },
+  {
+    "Id": "0006",
+    "Type": "filled",
+    "Name": "Filled",
+    "Batter": "Regular",
+    "Topping": "Maple"
+  }
+]
+=============================
+Complete Code thankyou
+===========================
